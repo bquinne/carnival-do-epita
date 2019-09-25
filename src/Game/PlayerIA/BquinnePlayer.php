@@ -61,7 +61,7 @@ class BquinnePlayer extends Player
     public function wtfStrategy3()
     {
 
-        if (($this->result->getNbRound() % 10) < 3) {
+        if (($this->result->getNbRound() % 10) < 2) {
             return $this->firstStrategy();
         } elseif (($this->result->getNbRound() % 10) < 6)  {
             return  $this->statStrategy();
@@ -71,16 +71,6 @@ class BquinnePlayer extends Player
         }
     }
 
-    /*
-    public function lastStrategy()
-    {
-        $total = $this->result->getNbRound()
-        $scissorStat = $stat["scissors"] / $total;
-        $rockStat = $stat["rock"] / $total;
-        $paperStat = $stat["paper"] / $total;
-
-
-    }*/
 
     public function firstStrategy() {
         if ($this->result->getLastChoiceFor($this->opponentSide) == 'scissors') {
