@@ -50,6 +50,20 @@ class BquinnePlayer extends Player
         }
     }
 
+    public function wtfStrategy3()
+    {
+
+        if (($this->result->getNbRound() % 10) < 3) {
+            return $this->firstStrategy();
+        } elseif (($this->result->getNbRound() % 10) < 6)  {
+            return  $this->winAgainstWinnerStrategy();
+            } else {
+            return $this->statStrategy();
+
+        }
+    }
+
+
     public function firstStrategy() {
         if ($this->result->getLastChoiceFor($this->opponentSide) == 'scissors') {
             return parent::rockChoice();
@@ -67,16 +81,24 @@ class BquinnePlayer extends Player
     public function winAgainstWinnerStrategy() {
 
         if ($this->result->getLastChoiceFor($this->opponentSide) == 'scissors') {
-            return parent::rockChoice();
+            return $this->getWinMove(parent::rockChoice());
         }
 
         if ($this->result->getLastChoiceFor($this->opponentSide) == 'rock') {
-            return parent::paperChoice();
+            return $this->getWinMove(parent::paperChoice());
         }
 
         if ($this->result->getLastChoiceFor($this->opponentSide) == 'paper') {
-            return parent::scissorsChoice();
+            return $this->getWinMove(parent::scissorsChoice());
         }
+    }
+
+    public function getWinRate() {
+        $statOpponent = $this->result->getStatsFor($this->opponentSide);
+
+        $total = $statOpponent["scissors"] + $stat["rock"] + $stat["paper"];
+
+        $this->result->getNbRound();
     }
 
     public function statStrategy()
@@ -107,7 +129,7 @@ class BquinnePlayer extends Player
     public function getChoice()
     {
 
-        return $this->wtfStrategy2();
+        return $this->wtfStrategy3();
         // -------------------------------------    -----------------------------------------------------
         // How to get my Last Choice           ?    $this->result->getLastChoiceFor($this->mySide) -- if 0 (first round)
         // How to get the opponent Last Choice ?    $this->result->getLastChoiceFor($this->opponentSide) -- if 0 (first round)
