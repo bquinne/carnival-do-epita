@@ -33,8 +33,8 @@ class BquinnePlayer extends Player
     public function wtfStrategy()
     {
 
-        if (($this->result->getNbRound() % 20) < 5) {
-            return parent::scissorsChoice();
+        if (($this->result->getNbRound() % 10) < 3) {
+            return $this->scissorsChoice();
         } else {
             return $this->firstStrategy();
         }
@@ -43,14 +43,29 @@ class BquinnePlayer extends Player
     public function wtfStrategy2()
     {
 
-        if (($this->result->getNbRound() % 20) < 5) {
-            return parent::scissorsChoice();
+        if (($this->result->getNbRound() % 10) < 3) {
+            return $this->firstStrategy();
         } else {
             return $this->statStrategy();
         }
     }
 
     public function firstStrategy() {
+        if ($this->result->getLastChoiceFor($this->opponentSide) == 'scissors') {
+            return parent::rockChoice();
+        }
+
+        if ($this->result->getLastChoiceFor($this->opponentSide) == 'rock') {
+            return parent::paperChoice();
+        }
+
+        if ($this->result->getLastChoiceFor($this->opponentSide) == 'paper') {
+            return parent::scissorsChoice();
+        }
+    }
+
+    public function winAgainstWinnerStrategy() {
+
         if ($this->result->getLastChoiceFor($this->opponentSide) == 'scissors') {
             return parent::rockChoice();
         }
