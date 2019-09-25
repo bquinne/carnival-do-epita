@@ -17,15 +17,15 @@ class BquinnePlayer extends Player
 
     public function getChoice()
     {
-        if ($this->result->getLastChoiceFor($this->opponentSide) == 'scissors' && $this->result->getLastScoreFor($this->mySide)) {
+        if ($this->result->getLastChoiceFor($this->opponentSide) == 'scissors') {
             return parent::rockChoice();
         }
 
-        if ($this->result->getLastChoiceFor($this->opponentSide) == 'rock' && $this->result->getLastScoreFor($this->mySide)) {
+        if ($this->result->getLastChoiceFor($this->opponentSide) == 'rock') {
             return parent::paperChoice();
         }
 
-        if ($this->result->getLastChoiceFor($this->opponentSide) == 'paper' && $this->result->getLastScoreFor($this->mySide)) {
+        if ($this->result->getLastChoiceFor($this->opponentSide) == 'paper') {
             return parent::scissorsChoice();
         }
         // -------------------------------------    -----------------------------------------------------
