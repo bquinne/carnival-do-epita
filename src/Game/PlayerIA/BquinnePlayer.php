@@ -15,8 +15,32 @@ class BquinnePlayer extends Player
     protected $opponentSide;
     protected $result;
 
-    public function getChoice()
+
+
+    public function getWinMove($move)
     {
+        if ($move === 'scissors') {
+            return parent::rockChoice();
+        }
+        if ($move === 'rock') {
+            return parent::paperChoice();
+        }
+        if ($move === 'paper') {
+            return parent::scissorsChoice();
+        }
+    }
+
+    public function wtfStrategy()
+    {
+
+        if (($this->result->getNbRound() % 10) < 5) {
+            return parent::scissorsChoice();
+        } else {
+            return $this->firstStrategy();
+        }
+    }
+
+    public function firstStrategy() {
         if ($this->result->getLastChoiceFor($this->opponentSide) == 'scissors') {
             return parent::rockChoice();
         }
@@ -28,6 +52,13 @@ class BquinnePlayer extends Player
         if ($this->result->getLastChoiceFor($this->opponentSide) == 'paper') {
             return parent::scissorsChoice();
         }
+    }
+
+
+    public function getChoice()
+    {
+
+        return $this->wtfStrategy();
         // -------------------------------------    -----------------------------------------------------
         // How to get my Last Choice           ?    $this->result->getLastChoiceFor($this->mySide) -- if 0 (first round)
         // How to get the opponent Last Choice ?    $this->result->getLastChoiceFor($this->opponentSide) -- if 0 (first round)
@@ -52,6 +83,6 @@ class BquinnePlayer extends Player
         // How can i display the result of each round ? $this->prettyDisplay()
         // -------------------------------------    -----------------------------------------------------
         
-        return parent::paperChoice();            
+        return parent::paperChoice();
   }
 };
