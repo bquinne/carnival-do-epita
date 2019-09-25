@@ -4,12 +4,12 @@ namespace Hackathon\PlayerIA;
 use Hackathon\Game\Result;
 
 /**
- * Class bquinnePlayer
+ * Class BquinnePlayer
  * @package Hackathon\PlayerIA
  * @author Robin
  *
  */
-class bquinnePlayerPlayer extends Player
+class BquinnePlayer extends Player
 {
     protected $mySide;
     protected $opponentSide;
