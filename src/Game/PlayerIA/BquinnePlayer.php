@@ -40,6 +40,16 @@ class BquinnePlayer extends Player
         }
     }
 
+    public function wtfStrategy2()
+    {
+
+        if (($this->result->getNbRound() % 20) < 5) {
+            return parent::scissorsChoice();
+        } else {
+            return $this->statStrategy();
+        }
+    }
+
     public function firstStrategy() {
         if ($this->result->getLastChoiceFor($this->opponentSide) == 'scissors') {
             return parent::rockChoice();
@@ -58,7 +68,7 @@ class BquinnePlayer extends Player
     {
         $stat = $this->result->getStatsFor($this->opponentSide);
         $total = $stat["scissors"] + $stat["rock"] + $stat["paper"];
-        $scissorStat = $stat["scissor"] / $total;
+        $scissorStat = $stat["scissors"] / $total;
         $rockStat = $stat["rock"] / $total;
         $paperStat = $stat["paper"] / $total;
 
@@ -79,11 +89,10 @@ class BquinnePlayer extends Player
         return $this->paperChoice();
     }
 
-
     public function getChoice()
     {
 
-        return $this->wtfStrategy();
+        return $this->wtfStrategy2();
         // -------------------------------------    -----------------------------------------------------
         // How to get my Last Choice           ?    $this->result->getLastChoiceFor($this->mySide) -- if 0 (first round)
         // How to get the opponent Last Choice ?    $this->result->getLastChoiceFor($this->opponentSide) -- if 0 (first round)
